@@ -1,0 +1,157 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="true"
+    [ngClass]="{ minimized: isToggled }"
+  >
+    <button color="primary" mat-mini-fab (click)="toggle()">
+      <mat-icon *ngIf="!isToggled">close</mat-icon>
+      <mat-icon *ngIf="isToggled">menu</mat-icon>
+    </button>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Dashboard"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>dashboard</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Dashboard</span>
+        </div></a
+      >
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Supplier"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>store</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Supplier</span>
+        </div></a
+      >
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Projects"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>rocket_launch</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Projects</span>
+        </div></a
+      >
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Incident Reports"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>report</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Incident Reports</span>
+        </div></a
+      >
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Surveys"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>fact_check</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Surveys</span>
+        </div></a
+      >
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Setups"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>settings_input_component</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Setups</span>
+        </div></a
+      >
+      <a
+        mat-list-item
+        href="#"
+        matTooltip="Manage Accounts"
+        matTooltipPosition="after"
+        [matTooltipDisabled]="!isToggled"
+        ><div>
+          <mat-icon>manage_accounts</mat-icon>
+          <span [ngClass]="{ hide: isToggled }">Manage Accounts</span>
+        </div></a
+      >
+    </mat-nav-list></mat-sidenav
+  >
+  <mat-sidenav-content [ngClass]="{ 'sidenav-minimized': isToggled }">
+    <mat-toolbar color="primary">
+      <span>SRM App</span>
+      <span style="flex: auto"></span>
+      <div class="toggle">
+        <mat-slide-toggle
+          [(ngModel)]="isDarkMode"
+          (change)="onChanged($event)"
+          color="accent"
+        >
+          <mat-icon>{{
+            isDarkMode ? "dark_mode_round" : "light_mode"
+          }}</mat-icon>
+        </mat-slide-toggle>
+      </div>
+    </mat-toolbar>
+    <div class="container">
+      <div class="breadcrumb-container">
+        <h2>Dashboard</h2>
+        <div class="breadcrumb">
+          <mat-icon>home</mat-icon>
+          <mat-icon>navigate_next</mat-icon>
+          <span>Dashboard</span>
+        </div>
+      </div>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Recent Surveys</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>Survey Type</th>
+              <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="respondent">
+              <th mat-header-cell *matHeaderCellDef>Respondent Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.respondent }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="surveyDate">
+              <th mat-header-cell *matHeaderCellDef>Survey Date</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.surveyDate | date : "mediumDate" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="performanceRating">
+              <th mat-header-cell *matHeaderCellDef>Performance Rating</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.performanceRating }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

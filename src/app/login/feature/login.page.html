@@ -1,0 +1,46 @@
+<div class="container">
+  <mat-card>
+    <div class="toggle">
+      <mat-slide-toggle [(ngModel)]="isChecked" (change)="onChanged($event)">
+        <mat-icon>{{ isChecked ? "dark_mode_round" : "light_mode" }}</mat-icon>
+      </mat-slide-toggle>
+    </div>
+    <mat-card-title> Supplier Relationship Management </mat-card-title>
+    <mat-card-subtitle>
+      Manage your supplier information and supplier surveys.
+    </mat-card-subtitle>
+    <form [formGroup]="loginForm" autocomplete="srm-login">
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          placeholder="Email address"
+          formControlName="email"
+          required
+        />
+        <mat-error>Email address is not valid.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <mat-error>Password is required.</mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="loginForm.invalid"
+        required
+      >
+        Login
+      </button>
+    </form>
+    <mat-card-subtitle>
+      App Version: <strong> {{clientVersion}}</strong></mat-card-subtitle
+    >
+  </mat-card>
+</div>
